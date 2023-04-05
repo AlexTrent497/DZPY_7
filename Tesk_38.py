@@ -17,11 +17,7 @@ def read(db: dict, surname_filter: str) -> int:
  
 def print_record(db: dict, _id: int):
     print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
-    # alternative:
-    # if _id is not None:
-    #     print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
-    # else:
-    #     print(f'{"="*30}\nЗапись не найдена!\n{"="*30}\n')
+    
  
  
  
@@ -41,8 +37,7 @@ def print_data(db: dict) -> None:
     for _id, data in db.items():
         print(f"[{_id}: {data['surname']} | {data['name']} | {data['phone']} | {data['discription']} ]")
  
- 
-# 3) экспорт данных в текстовый файл формата csv
+
 def export_db(db: dict, filepath: str, delimeter: str = '#') -> None:
     with open(filepath, "w", encoding='utf-8') as file:
         for _id, data in db.items():
@@ -53,11 +48,11 @@ def get_file_name() -> str:
     return input("Введите имя файла: ")
  
  
-# 4) импорт данных из текстового файла формата csv
+
 def import_db(db: dict, last_id: int, filepath: str, delimeter: str = '#') -> tuple:
     with open(filepath, "r", encoding='utf-8') as file:
         for line in file:
-            # data['surname']},{data['name']},{data['phone']},{data['discription']}
+            
             _data = line.strip().split(delimeter)
             db[last_id] = {"surname": _data[0], 'name': _data[1], 'phone': _data[2], 'discription': _data[3]}
             last_id += 1
@@ -84,7 +79,7 @@ def menu(db: dict, last_id: int) -> None:
             export_db(db, get_file_name())
         elif user_input == "4":
             db, last_id = import_db(db, last_id, get_file_name())
-            # db, last_id = import_db(db, last_id, 'data08_1.txt')
+            
         elif user_input == "5":
             found_id = read(db, get_surname())
             try:
